@@ -118,7 +118,7 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                 function (status, code, data) {
                     var issue = data ? JSON.parse(data) : {};
                     callback.call(issue, issue);
-                })
+                }, true)
         },
 
         login:function (url,username, password, cb) {
