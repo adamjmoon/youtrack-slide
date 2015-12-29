@@ -217,7 +217,7 @@ define(["class", "util"], function(Class, Util) {
         case "Assigned QA":
           column = new CodeReviewer(name,this.issue);
           break;
-        case "Product Owner":
+        case "Business Owner":
           column = new CodeReviewer(name,this.issue);
           break;      
         case "summary":

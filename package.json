@@ -1,0 +1,29 @@
+{
+  "name": "youtrack-slide-material",
+  "version": "1.0.0",
+  "description": "YouTrack Slide Ui with Material",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamjmoon/youtrack-slide.git"
+  },
+  "keywords": [
+    "youtrack",
+    "material"
+  ],
+  "author": "Adam Moon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamjmoon/youtrack-slide/issues"
+  },
+  "homepage": "https://github.com/adamjmoon/youtrack-slide#readme",
+  "devDependencies": {
+    "lite-server": "^1.3.2"
+  }
+}

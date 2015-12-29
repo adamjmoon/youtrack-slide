@@ -78,12 +78,11 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                         if (typeof oTable == 'undefined') {
                             oTable = $('#searchResults').DataTable( {
                             select: true,
-                            responsive: true,    
-                            "aaSorting": [ [1,'asc'], [4,'asc'] ],
+                            responsive: true,
                             "bAutoWidth": true,
                             dom: 'Bfrt',
                             fixedHeader: true,
-                            "scrollY":        "800px",
+                            "scrollY":        "700px",
                             "scrollCollapse": true,
                             "paging":         false,
                             "ordering": true,

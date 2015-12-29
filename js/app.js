@@ -1,7 +1,7 @@
 define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns", "keys"],
     function(Class, Youtrack, Selection, Pubsub, Router, Util, Columns, Keys) {
   var App = Keys.extend({
-    columns: ['id', "Priority", "Reporter", 'summary', "State", "Squad","updated","Assignee","Assigned QA","Code Reviewed By","Product Owner"],
+    columns: ['id', "Priority", "Reporter", 'summary', "State", "Squad","updated","Assignee","Assigned QA","Code Reviewed By","Business Owner"],
     systemProperties: [
       "projectShortName",
       "numberInProject",
@@ -145,7 +145,7 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
 
         var self = this;
         var login = $('.top .login');
-        login.html('Logged in as <i><a href="" class="light">{0}</a></i>'.replace('{0}', userName));
+        login.html('<i><a href="" class="light">{0}</a></i>'.replace('{0}', userName));
         $('a', login).click(function(){
             self._switchUser();
             return false;
@@ -336,12 +336,12 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
 
       var onResize = function() {
         self.$fsi.css({
-          width: w.width() + self._getOffset(),
-          height: w.height(),
+          overflow: 'auto !important',
+          width: '100%',
+          height: '100%',
           left: w.width() - self._getOffset()
         });
 
-        handle.height(self.$fsi.height());
       };
 
       Pubsub.subscribe("window:resized", onResize);
@@ -394,24 +394,6 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
 */
 
 
-      /* TODO: ISSUE LIST HEADER */
-
-      var table = $("table");
-
-//      var issuesHeader = $("<thead/>");
-//      issuesHeader.append("<td/>"); // .sel
-//      for (var i in this.columns) {
-//        issuesHeader.append(Columns.create(this.columns[i], null).buildTitle());
-//      }
-//      table.append(issuesHeader);
-//
-//      $('.main').css({
-//        'margin-top': '{0}px'.replace('{0}', $('table thead').outerHeight(true))
-//      });
-//
-//      $('thead', table).css({
-//        top: $('.top').outerHeight(true)
-//      });
 
     },
 
@@ -461,7 +443,7 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
 
       this.$fsi.css({
         "-webkit-transition": "left 100ms ease",
-        left: 200
+        left: 100
       });
     },
 
@@ -477,7 +459,7 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
       var offset = this.fsiState == 0 ? $(window).width() - this._getOffset() : this._partialOffset();
       this.$fsi.css({
         "-webkit-transition": "left 100ms ease",
-        left: offset
+        left: 100
       });
     },
 
@@ -605,10 +587,10 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
         test.text(text);
 
         var resized = function() {
-          self.maxWidth = test.width();
+
           Pubsub.publish("relayout");
 
-          console.log("WIDTH", self.maxWidth, "pixels");
+
         };
 
         test.resize(resized);
@@ -640,7 +622,7 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
           }
         }
 
-        $("table ." + _class).width(toCollapse.width() - (table.width() - issues.width()));
+     //   $("table ." + _class).width(toCollapse.width() - (table.width() - issues.width()));
 
 //        $("table ." + _class).css({'-webkit-transform' :'rotateY(100deg)'.replace('{0}', table.width() - issues.width())});
 
@@ -649,7 +631,7 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
     },
 
     _updateFsi: function() {
-      if (this.fsiState < 1) return;
+      //if (this.fsiState < 1) return;
       var issue = this._getSelectedIssue();
       this._buildFsi(issue.data("issue"), $(".content", this.$fsi));
     },
@@ -669,9 +651,15 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
     },
 
     _buildFields: function(issue) {
-      var el = $("<div/>", {class: "fields"});
+      var el = $("<div/>", {class: "mdl-card mdl-shadow--2dp fields"});
       this._iteratePublicFields(issue, function() {
-        el.append('<div class="row"><div class="name">{0}</div><div class="value">{1}</div></div>'.replace("{0}", this.name).replace("{1}", this.value));
+        if(typeof this.value === "Object"){
+          el.append('<div class="row"><div class="name">{0}</div><div class="value">{1}</div></div>'.replace("{0}", this.name).replace("{1}", JSON.stringify(this.value)));
+        }
+        else{
+          el.append('<div class="row"><div class="name">{0}</div><div class="value">{1}</div></div>'.replace("{0}", this.name).replace("{1}", this.value));
+        }
+
       });
 
       return el;
