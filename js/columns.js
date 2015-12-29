@@ -1,4 +1,4 @@
-define(["jquery", "class", "util"], function($, Class, Util) {
+define(["class", "util"], function(Class, Util) {
   var Column = Class.extend({
     init: function(name, issue, collapsable) {
       this.issue = issue;
@@ -68,7 +68,40 @@ define(["jquery", "class", "util"], function($, Class, Util) {
       return "";
     }
   });
+    
+  var CodeReviewer = Text.extend({
+    init: function(name, issue) {
+    
+      this._super(name, issue, false);
+    },
 
+    _val: function() {
+       
+      
+        var value = Util.valFromArray(this.issue.field, this.name);
+        if(value){
+            return value[0].value;  
+        } else{
+            return "";
+        }
+    },
+
+    title: function() {
+      return name;
+    }
+  });
+    
+  var Reporter = Text.extend({
+    init: function(issue) {
+      this._super("reporterFullName", issue, false);
+    },    
+     
+    title: function() {
+      return "Reporter";
+    }
+  });
+    
+ 
   var Priority = Column.extend({
     init: function(issue) {
       this._super("Priority", issue, false);
@@ -87,6 +120,28 @@ define(["jquery", "class", "util"], function($, Class, Util) {
       return "";
     }
   });
+    
+  var State = Column.extend({
+    init: function(issue) {
+      this._super("State", issue, false);
+    },
+
+    build: function() {
+      var el = $('<div></div>', {class: "state"});
+      var stateVal = Util.valFromArray(this.issue.field, this.name).toString();
+      
+      el.addClass(stateVal.toLowerCase().replace(/ /g,'_'));
+      el.text(stateVal);
+      var td = this._cell();
+      td.append(el);
+      return td;
+    },
+
+    title: function() {
+      return "";
+    }
+  });
+    
 
   var Updated = Column.extend({
     init: function(issue) {
@@ -141,12 +196,30 @@ define(["jquery", "class", "util"], function($, Class, Util) {
         case "Priority":
           column = new Priority(this.issue);
           break;
+        case "State":
+          column = new State(this.issue);
+          break;      
         case "id":
           column = new Id(this.issue);
           break;
         case "updated":
           column = new Updated(this.issue);
           break;
+        case "Reporter":
+          column = new Reporter(this.issue);
+          break;          
+        case "Code Reviewed By":
+          column = new CodeReviewer(name,this.issue);
+          break;
+        case "Assignee":
+          column = new CodeReviewer(name,this.issue);
+          break;
+        case "Assigned QA":
+          column = new CodeReviewer(name,this.issue);
+          break;
+        case "Product Owner":
+          column = new CodeReviewer(name,this.issue);
+          break;      
         case "summary":
           column = new Text(name, this.issue, false);
           break;

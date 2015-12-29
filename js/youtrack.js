@@ -3,6 +3,7 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
         limit:100,
         cookieName: "youtrack_slide",
         server: "",
+        oTable: undefined,
 
         init:function (url) {
             this.url = url;
@@ -74,9 +75,59 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                         for (var i in issues.issue) {
                             cb.call(context, issues.issue[i], i);
                         }
+                        if (typeof oTable == 'undefined') {
+                            oTable = $('#searchResults').DataTable( {
+                            select: true,
+                            responsive: true,    
+                            "aaSorting": [ [1,'asc'], [4,'asc'] ],
+                            "bAutoWidth": true,
+                            dom: 'Bfrt',
+                            fixedHeader: true,
+                            "scrollY":        "800px",
+                            "scrollCollapse": true,
+                            "paging":         false,
+                            "ordering": true,
+                            "info":     true,
+                            "dom": '<"top"fB>rt<"bottom"><"clear">',        
+                            buttons: [
+                                'columnsToggle',                
+                                 {
+                                    extend: 'copyHtml5',
+                                    exportOptions: {
+                                        columns: [ 0, ':visible' ]
+                                    }
+                                },
+                                {
+                                    extend: 'csvHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'pdfHtml5',
+                                    exportOptions: {
+                                        columns: [ 0, 1, 2, 5 ]
+                                    }
+                                }
+                        ]
+                        } );  
+                            
+                        $('#searchResults').css("visibility","visible"); 
+                        $('.dataTables_scrollHead .dataTables_scrollHeadInner table').css("visibility","visible");   
+                        }
+                        else{
+                            $('#searchResults').html("");
+                            oTable.fnClearTable( 0 );
+			                 oTable.fnDraw();
+                        }
+                             
+                         $('.dt-button').addClass('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect');
+                        $('.dataTables_filter label input').addClass("mdl-textfield__input search-filter-input");
+                           
                     } else {
                         cb.call(context, false);
                     }
+                       
                 }, true);
         },
 

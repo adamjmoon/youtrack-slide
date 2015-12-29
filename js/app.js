@@ -1,7 +1,7 @@
-define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", "columns", "keys"],
-    function($, Class, Youtrack, Selection, Pubsub, Router, Util, Columns, Keys) {
+define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns", "keys"],
+    function(Class, Youtrack, Selection, Pubsub, Router, Util, Columns, Keys) {
   var App = Keys.extend({
-    columns: ['id', 'Priority', 'summary', "updated", "State", "reporterFullName"],
+    columns: ['id', "Priority", "Reporter", 'summary', "State", "Squad","updated","Assignee","Assigned QA","Code Reviewed By","Product Owner"],
     systemProperties: [
       "projectShortName",
       "numberInProject",
@@ -40,6 +40,8 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
       var self = this;
 
       this.selection.bind("selection", this._onSelectionChanged, this);
+        
+          
 
       $(".issue").live('click', function(e) {
         var issue = $(e.target).parents(".issue");
@@ -60,7 +62,7 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
       this._initSearchField();
       this._initWindows();
       this._initLogin();
-//      this._initRelayout();
+      this._initRelayout();
     },
 
     _initLogin: function() {
@@ -273,6 +275,7 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
       this._clearIssues();
       this._toggleLoading(true);
       this.youtrack.search(url, encodeURIComponent(_new), this._issueFound, 0, this);
+       
     },
 
     _clearIssues: function() {
@@ -295,10 +298,11 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
       }
 
       this._appendIssue(issue);
+      
     },
 
     _fixLayout: function() {
-      $(".c").css({"margin-top": $(".top").outerHeight(true)})
+//      $(".c").css({"margin-top": $(".top").outerHeight(true)})
     },
 
     _toggleLoading: function(show){
@@ -306,7 +310,7 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
     },
 
     _getOffset: function() {
-      return $('.handle', this.$fsi).outerWidth(true);
+      return 200;
     },
 
     _rightOffset: function() {
@@ -365,17 +369,17 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
       });
 
       /* TODO: click to show FSI */
-/*
-      fsi.click(function() {
-        if (fsi.hasClass("hidden")) {
-          self._showFsi(false);
 
-          return false;
-        }
+//      fsi.click(function() {
+//        if (fsi.hasClass("hidden")) {
+//          self._showFsi(false);
+//
+//          return false;
+//        }
+//
+//        return true;
+//      });
 
-        return true;
-      });
-*/
 
 
       /* TODO: SCROLL SHADOW */
@@ -391,24 +395,24 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
 
 
       /* TODO: ISSUE LIST HEADER */
-/*
+
       var table = $("table");
 
-      var issuesHeader = $("<thead/>");
-      issuesHeader.append("<td/>"); // .sel
-      for (var i in this.columns) {
-        issuesHeader.append(Columns.create(this.columns[i], null).buildTitle());
-      }
-      table.append(issuesHeader);
+//      var issuesHeader = $("<thead/>");
+//      issuesHeader.append("<td/>"); // .sel
+//      for (var i in this.columns) {
+//        issuesHeader.append(Columns.create(this.columns[i], null).buildTitle());
+//      }
+//      table.append(issuesHeader);
+//
+//      $('.main').css({
+//        'margin-top': '{0}px'.replace('{0}', $('table thead').outerHeight(true))
+//      });
+//
+//      $('thead', table).css({
+//        top: $('.top').outerHeight(true)
+//      });
 
-      $('.main').css({
-        'margin-top': '{0}px'.replace('{0}', $('table thead').outerHeight(true))
-      });
-
-      $('thead', table).css({
-        top: $('.top').outerHeight(true)
-      });
-*/
     },
 
     _scrollToIssue: function(issue) {
@@ -443,13 +447,13 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
       this.fsiState = state === undefined ? this.fsiState + 1 : state;
       this.fsiState = this.fsiState > 2 ? 2 : this.fsiState;
 
-      if (this.$fsi.position().left <= 0) return;
+//      if (this.$fsi.position().left <= 0) return;
 
       this.$fsi.removeClass("hidden");
 
-      if (this.fsiState < 2) {
-        $('.handle .glyph', this.$fsi).text('u');
-      }
+//      if (this.fsiState < 2) {
+//        $('.handle .glyph', this.$fsi).text('u');
+//      }
 
       var offset = this.fsiState == 2 ? -this._getOffset() : this._partialOffset();
 
@@ -457,7 +461,7 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
 
       this.$fsi.css({
         "-webkit-transition": "left 100ms ease",
-        left: offset
+        left: 200
       });
     },
 
@@ -557,9 +561,10 @@ define(["jquery", "class", "youtrack", "selection", "pubsub", "router", "util", 
 
       var row = $("<tr/>", {class: "issue", id: issue.id});
 
-      row.append("<td class='sel'></td>");
-
+      
+      
       for (var i in this.columns) {
+          
         Columns.create(this.columns[i], issue).render(row);
       }
 
