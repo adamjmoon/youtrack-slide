@@ -127,7 +127,7 @@ define(["class", "util"], function(Class, Util) {
     },
 
     build: function() {
-      var el = $('<div></div>', {class: "state"});
+      var el = $('<div></div>', {class: "state mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"});
       var stateVal = Util.valFromArray(this.issue.field, this.name).toString();
       
       el.addClass(stateVal.toLowerCase().replace(/ /g,'_'));

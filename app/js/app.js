@@ -40,6 +40,7 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
       var self = this;
 
       this.selection.bind("selection", this._onSelectionChanged, this);
+
         
           
 
@@ -63,6 +64,10 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
       this._initWindows();
       this._initLogin();
       this._initRelayout();
+
+      window.MaterialButton.init();
+      window.MaterialTextfield.init();
+
     },
 
     _initLogin: function() {
@@ -214,7 +219,13 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
     _initSearchField: function() {
       var field = $(".top input[type=text]");
 
+
       var self = this;
+
+      $(".search-icon-button").click(function(){
+        self._search();
+      });
+
       field.keydown(function(e) {
         if (self._stroke(e) == "typed ENTER") {
           self._search();
