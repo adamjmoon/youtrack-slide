@@ -40,17 +40,66 @@
 
     </div>
 </header>
+<div class="help dialog" style="visibility:hidden">
+<div class="close"><i class="material-icons">close</i></div>
+<h1>Shortcuts</h1>
+<table>
+    <tr>
+        <td>Show preview</td>
+        <td><span class="shortcut">&larr;</span></td>
+    </tr>
+    <tr>
+        <td>Hide preview</td>
+        <td><span class="shortcut">&rarr;</span></td>
+    </tr>
+    <tr>
+        <td>Show full screen issue</td>
+        <td><span class="shortcut">&#x23ce;</span> or <span class="shortcut">&larr; &larr;</span></td>
+    </tr>
+    <tr>
+        <td>Close full screen issue</td>
+        <td><span class="shortcut">ESC</span></td>
+    </tr>
+    <tr>
+        <td>Go to search</td>
+        <td><span class="shortcut">/</span></td>
+    </tr>
+    <tr>
+        <td>Show this help</td>
+        <td><span class="shortcut">h</span></td>
+    </tr>
+</table>
+</div>
+<div class="switch dialog mdl-card mdl-shadow--2dp" style="visibility: hidden;">
+    <div class="close"><i class="material-icons">close</i></div>
+    <h1>Switch account</h1>
+    <table>
+        <tr>
+            <td><input id="server" type="text" class="text" placeholder="Server"/></td>
+        </tr>
+        <tr>
+            <td><input id="login" type="text" class="text" placeholder="Username"/></td>
+        </tr>
+        <tr>
+            <td><input type="password" class="text" placeholder="Password"/></td>
+        </tr>
+        <tr>
+            <td class="buttons"><a href="" class="light">Cancel</a><input type="button" class="button" value="Login"/>
+            </td>
+        </tr>
+    </table>
+</div>
 <div class="c">
     <div class="main">
         <div class="issues">
 
+            <a data-toggle="drawer" class="flex-item"><i class="material-icons">menu</i></a>
             <table id="searchResults" class="display mdl-data-table mdl-js-data-table mdl-shadow--2dp is-upgraded"
-                   data-upgraded=",MaterialDataTable" cellspacing="0" width="100%" style="visibility: hidden">
+                   data-upgraded=",MaterialDataTable" cellspacing="0" width="100%" style="visibility: hidden;">
                 <thead class="thead">
                 <tr>
 
                     <th class="mdl-data-table__cell">Issue ID</th>
-                    <th>Priority</th>
                     <th class="mdl-data-table__cell">Reporter</th>
                     <th>Summary</th>
                     <th>Status</th>
@@ -80,7 +129,7 @@
     </div>
     <div class="fsi">
         <div class="handle">
-            <div class="glyph general">v</div>
+            <i class="material-icons">keyboard_arrow_left</i>
             <div class="hint">Issue Details</div>
         </div>
         <div class="content">
@@ -96,54 +145,6 @@
     </div>
 
 </div>
-<div class="help dialog" style="visibility:hidden">
-    <div class="close glyph general">g</div>
-    <h1>Shortcuts</h1>
-    <table>
-        <tr>
-            <td>Show preview</td>
-            <td><span class="shortcut">&larr;</span></td>
-        </tr>
-        <tr>
-            <td>Hide preview</td>
-            <td><span class="shortcut">&rarr;</span></td>
-        </tr>
-        <tr>
-            <td>Show full screen issue</td>
-            <td><span class="shortcut">&#x23ce;</span> or <span class="shortcut">&larr; &larr;</span></td>
-        </tr>
-        <tr>
-            <td>Close full screen issue</td>
-            <td><span class="shortcut">ESC</span></td>
-        </tr>
-        <tr>
-            <td>Go to search</td>
-            <td><span class="shortcut">/</span></td>
-        </tr>
-        <tr>
-            <td>Show this help</td>
-            <td><span class="shortcut">h</span></td>
-        </tr>
-    </table>
-</div>
-<div class="switch dialog mdl-card mdl-shadow--2dp" style="visibility: hidden;">
-    <div class="close glyph general">g</div>
-    <h1>Switch account</h1>
-    <table>
-        <tr>
-            <td><input id="server" type="text" class="text" placeholder="Server"/></td>
-        </tr>
-        <tr>
-            <td><input id="login" type="text" class="text" placeholder="Username"/></td>
-        </tr>
-        <tr>
-            <td><input type="password" class="text" placeholder="Password"/></td>
-        </tr>
-        <tr>
-            <td class="buttons"><a href="" class="light">Cancel</a><input type="button" class="button" value="Login"/>
-            </td>
-        </tr>
-    </table>
-</div>
+
 </body>
 </html>

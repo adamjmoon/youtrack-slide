@@ -32,10 +32,8 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
             withCredentials = withCredentials ? withCredentials : false;
 
             var req = new XMLHttpRequest();
-//            console.debug(">", method, url);
             var self = this;
             req.onreadystatechange = function () {
-                //console.log("readyState = " + req.readyState);
                 if(req.readyState == 4){
                     if (req.status == 200) {
                         callback.call(self, true, req.status, req.responseText);
@@ -72,6 +70,7 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                 function (status, code, data) {
                     var issues = data ? JSON.parse(data) : {};
                     if (issues.issue && issues.issue.length > 0) {
+                        console.log(window.innerHeight - 200 + "px");
                         for (var i in issues.issue) {
                             cb.call(context, issues.issue[i], i);
                         }
@@ -82,12 +81,12 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                             "bAutoWidth": true,
                             dom: 'Bfrt',
                             fixedHeader: true,
-                            "scrollY":        "700px",
+                            "scrollY":   window.innerHeight - 130 + "px",
                             "scrollCollapse": true,
                             "paging":         false,
                             "ordering": true,
-                            "info":     true,
-                            "dom": '<"top"fB>rt<"bottom"><"clear">',        
+                            "info":     false,
+                            "dom": '<"mdl-layout__drawer drawer"fB><"top">rt',
                             buttons: [
                                 'columnsToggle',                
                                  {
@@ -120,7 +119,7 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
 			                 oTable.fnDraw();
                         }
                              
-                         $('.dt-button').addClass('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect');
+                        $('.dt-button').addClass('mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect');
                         $('.dataTables_filter label input').addClass("mdl-textfield__input search-filter-input");
                            
                     } else {
