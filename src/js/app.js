@@ -1,4 +1,4 @@
-define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns", "keys"],
+define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns", "keys","filter"],
     function(Class, Youtrack, Selection, Pubsub, Router, Util, Columns, Keys) {
   var App = Keys.extend({
     columns: ['id',"Reporter", 'summary', "State", "Squad","updated","Assignee","Assigned QA","Code Reviewed By","Business Owner"],
