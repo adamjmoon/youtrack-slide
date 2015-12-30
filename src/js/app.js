@@ -40,6 +40,7 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
       var self = this;
 
       this.selection.bind("selection", this._onSelectionChanged, this);
+      Material.init()
         
           
 

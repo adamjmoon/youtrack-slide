@@ -70,7 +70,7 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                 function (status, code, data) {
                     var issues = data ? JSON.parse(data) : {};
                     if (issues.issue && issues.issue.length > 0) {
-                        console.log(window.innerHeight - 200 + "px");
+
                         for (var i in issues.issue) {
                             cb.call(context, issues.issue[i], i);
                         }
@@ -81,7 +81,7 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                             "bAutoWidth": true,
                             dom: 'Bfrt',
                             fixedHeader: true,
-                            "scrollY":   window.innerHeight - 130 + "px",
+                            "scrollY":   window.innerHeight - 172 + "px",
                             "scrollCollapse": true,
                             "paging":         false,
                             "ordering": true,
