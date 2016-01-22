@@ -94,6 +94,7 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
                         window.fullName = this.fullName;
                     });
                     self.youtrack.login(server.val().trim(), username.val().trim(), password.val().trim(), function (code) {
+                        debugger;
                         var success = code == 200;
                         if (success) {
                             self.youtrack.storeServer(server.val().trim());
@@ -101,6 +102,9 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
                             self.youtrack.getCurrentUser(function () {
                                 self._updateUserInfo(this.fullName);
                             })
+                        } else {
+                            debugger;
+                            self._switchUser();
                         }
                         self._toggleError(server, success);
                     });
@@ -143,7 +147,12 @@ define(["class", "youtrack", "selection", "pubsub", "router", "util", "columns",
             _initCurrentUser: function () {
                 var self = this;
                 this.youtrack.getCurrentUser(function () {
-                    self._updateUserInfo(this.fullName)
+                    debugger;
+                    if (this.login === "<no user>") {
+                        self._switchUser();
+                    } else {
+                        self._updateUserInfo(this.fullName)
+                    }
                 });
             },
 
