@@ -1,6 +1,6 @@
 define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
     var Youtrack = Class.extend({
-        limit: 100,
+        limit: 300,
         cookieName: "youtrack_slide",
         server: "",
         oTable: undefined,
