@@ -89,7 +89,7 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                             $('.dataTables_scrollHead .dataTables_scrollHeadInner table').css("visibility", "visible");
                         } else {
                             oTable.destroy();
-                            document.getElementById('tableWrapper').innerHTML = '<table id="searchResults" class="display mdl-data-table mdl-js-data-table mdl-shadow--2dp is-upgraded" data-upgraded=",MaterialDataTable" cellspacing="0" width="100%" style="visibility: hidden;"> <thead class="thead"> <tr> <th class="mdl-data-table__cell">Issue ID</th> <th class="mdl-data-table__cell">Reporter</th> <th>Summary</th> <th>Status</th> <th>Squad</th> <th>Last Updated</th> <th>Assignee</th> <th>AssignedBy</th> <th>Code Reviewer</th> <th>Product Owner</th> </tr></thead> <tbody> </tbody> </table>';
+                            document.getElementById('tableWrapper').innerHTML = '<table id="searchResults" class="display mdl-data-table mdl-js-data-table mdl-shadow--2dp is-upgraded" data-upgraded=",MaterialDataTable" cellspacing="0" width="100%" style="visibility: hidden;"> <thead class="thead"> <tr> <th class="mdl-data-table__cell">Rank</th><th class="mdl-data-table__cell">Issue ID</th> <th class="mdl-data-table__cell">Reporter</th> <th>Summary</th> <th>Status</th> <th>Squad</th> <th>Last Updated</th> <th>Assignee</th> <th>AssignedBy</th> <th>Code Reviewer</th> <th>Product Owner</th> </tr></thead> <tbody> </tbody> </table>';
 
                             for (var i in issues.issue) {
                                 cb.call(context, issues.issue[i], i);
