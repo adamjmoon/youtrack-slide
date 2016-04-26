@@ -239,6 +239,9 @@ define(["class", "util"], function (Class, Util) {
             case "summary":
                 column = new Text(name, this.issue, false);
                 break;
+            case "Rank":
+                column = new Text(name, this.issue);
+                break;    
             default:
                 column = new Text(name, this.issue);
                 break;
