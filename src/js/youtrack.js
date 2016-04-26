@@ -121,7 +121,6 @@ define(["underscore", "backbone", "class"], function (_, Backbone, Class) {
                             "scrollCollapse": true,
                             "paging": false,
                             "ordering": true,
-                            "order": [[0, "asc"]],
                             "info": false,
                             "dom": '<"mdl-layout__drawer drawer"fB><"top">rt',
                             buttons: [
